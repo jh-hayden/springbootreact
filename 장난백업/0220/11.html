@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 문 6) 배열(함수들의 모임)을 호출하세요
+      var uvw = { b: [(i) => i + 1, (i) => i + 2, (i) => i + 3] };
+      //distrucing
+      // 문 7) i를 받아서 i단의 구구단 문자열을 반환하는 기능 구현
+
+      const gugu = (i) => {
+        var a = [];
+        for (var j = 1; j < 10; j++) {
+          a[j - 1] = i + "*" + j + "=" + i * j;
+        }
+
+        return a;
+      };
+      var ans= gugu(2);
+      console.log(ans);
+
+      
+      const plus = (e) => {
+          var ans = [];
+          for (var c=1; c<4; c++){
+             ans[c-1]=e+c
+          }
+          return ans;
+      }
+    
+       var x = plus("1")
+      console.log(x)
+
+      pow(1,2)
+
+      
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var pr = {
+        a: { b: { c: [, 1, 2, 3, 4], a: { p: [11, 12, 23, 45] } } },
+      };
+      console.log(pr);
+      //[11,12,23,45] 배열의 총합을 구하세요
+
+      var { a } = pr;
+      var { b } = a;
+      var { a } = b;
+      var { p } = a;
+      console.log(p);
+
+      var sum = 0; // 총합에 대한 변수 0 초기화 (담아야 하니까)
+      for (var i = 0; i < p.length; i++) {
+        sum += p[i];
+      }
+      console.log(sum);
+    </script>
+  </body>
+</html>

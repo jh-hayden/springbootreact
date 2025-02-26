@@ -7,24 +7,21 @@ const initState = {
   writer: "",
   dueDate: "",
 };
+
 const AddComponent = () => {
   const [todo, setTodo] = useState({ ...initState });
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState(null); // 결과 상태
+
   const handleChangeTodo = (e) => {
-    todo[e.target.name] = e.target.value;
-    setTodo({ ...todo });
+    todo[e.target.name] = e.target.value; // e: 해당 입력 필드의 정보를 담고 있음
+    setTodo({ ...todo }); // 스프레드 연산자를 사용하여 todo 객체를 복사한 후 새로운 객체를 생성
   };
+
   const handleAddClick = () => {
-    console.log(todo);
-    //이후 채우기
-    //api 를 만든다
-    //성공하면  then 함수로 전달
-    //실패하면  catch함수로 전달
-    postAdd(todo)
-      .then((result) => {
+    postAdd(todo).then((result) => {
         console.log(result);
-        setResult(result.tno);
-        setTodo({ ...initState }); //초기화
+        setResult(result.tno); // 결과 데이터 변경
+        setTodo({ ...initState }); // todo 객체를 초기화
       })
       .catch((e) => console.error(e));
   };
@@ -32,6 +29,7 @@ const AddComponent = () => {
   const closeModal = () => {
     setResult(null);
   };
+
   return (
     <div className="border-2 border-sky-200 mt-10 m-2 p-4">
       {/* 모달 처리 */}

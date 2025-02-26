@@ -1,44 +1,47 @@
-import { lazy, Suspense } from "react";
+import { Suspense, lazy } from "react";
 import todoRouter from "./todoRouter";
-import proRouter from "./proRouter";
+import greenRouter from "./greenRouter";
+import productsRouter from "./productsRouter";
+import memberRouter from "./memberRouter";
+
 const { createBrowserRouter } = require("react-router-dom");
-//서버에서 데이터를 가져오는 중이다
-const Loading = <div>Loading</div>;
-const Main = lazy(() => import("../pages/MainPage"));
-const About = lazy(() => import("../pages/AboutPage"));
-const TodoIndex = lazy(() => import("../pages/todo/IndexPage"));
-const ProductsIndex = lazy(() => import("../pages/product/IndexPage"));
+
+const Loading = <div>Loading...</div>
+
+const Main = lazy(() => import("../pages/MainPage"))
+const About = lazy(() => import("../pages/AboutPage"))
+const TodoIndex = lazy(() => import("../pages/todo/IndexPage"))
+const Green = lazy(() => import("../pages/GreenPage"));
+const ProductsIndex = lazy(() => import("../pages/products/IndexPage"));
 
 const root = createBrowserRouter([
-  {
-    path: "",
-    element: (
-      <Suspense fallback={Loading}>
-        <Main />
-      </Suspense>
-    ),
-  },
-  {
-    path: "about",
-    element: (
-      <Suspense fallback={Loading}>
-        <About />
-      </Suspense>
-    ),
-  },
-  {
-    path: "todo",
-    element: (
-      <Suspense fallback={Loading}>
-        <TodoIndex />
-      </Suspense>
-    ),
-    children: todoRouter(),
-  },
-  {
-    path: "products",
-    element: <Suspense fallback={Loading}>{<ProductsIndex />}</Suspense>,
-    children: proRouter(),
-  },
-]);
+    {
+        path:"", // 리다이렉션 처리
+        element: <Suspense fallback={Loading}><Main/></Suspense>
+    },
+    {
+        path:"about",
+        element: <Suspense fallback={Loading}><About/></Suspense>
+    },
+    {
+        path:"todo",
+        element: <Suspense fallback={Loading}><TodoIndex/></Suspense>,
+        children: todoRouter() // 중첩 라우팅의 분리
+    },
+    {
+        path:"green",
+        element: <Suspense fallback={Loading}><Green/></Suspense>,
+        children: greenRouter() // 중첩 라우팅의 분리
+    },
+    {
+        path:"products",
+        element: <Suspense fallback={Loading}><ProductsIndex/></Suspense>,
+        children: productsRouter() // 중첩 라우팅의 분리
+    },
+    {
+        path:"member",
+        children: memberRouter()
+    }
+])
+
 export default root;

@@ -1,7 +1,9 @@
 import "./App.css";
-import Score from "./comp/Score";
+import { RouterProvider } from "react-router-dom";
+import root from "./router/root";
 
 function App() {
-  return <Score />;
+  return <RouterProvider router={root}></RouterProvider>;
 }
+
 export default App;

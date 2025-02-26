@@ -8,5 +8,4 @@ const AddPage = () => {
     </div>
   );
 };
-
 export default AddPage;

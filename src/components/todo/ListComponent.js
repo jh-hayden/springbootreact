@@ -17,7 +17,8 @@ const initState = {
 };
 
 const ListComponent = () => {
-  const { page, size, moveToList, moveToRead } = useCustomMove();
+  
+  const { page, size, moveToList, moveToRead, refresh } = useCustomMove();
   console.log("page:", page, "size", size);
   const [serverData, setServerData] = useState(initState);
 
@@ -26,7 +27,7 @@ const ListComponent = () => {
       console.log(data);
       setServerData(data);
     });
-  }, [page, size]);
+  }, [page, size, refresh]);
 
   return (
     <div className="border-2 border-blue-100 mt-10 mr-2 ml-2">
@@ -39,10 +40,10 @@ const ListComponent = () => {
           >
             <div className="flex">
               <div className="font-extrabold text-2xl p-2 w-1/12">{i.tno}</div>
-              <div className="font-extrabold text-2xl p-2 w-1/12">
+              <div className="text-1xl m-1 p-2 w-8/12 font-extrabold">
                 {i.title}
               </div>
-              <div className="font-extrabold text-2xl p-2 w-1/12">
+              <div className="text-1xl m-1 p-2 w-2/10 font-medium">
                 {i.dueDate}
               </div>
             </div>

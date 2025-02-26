@@ -1,11 +1,8 @@
 import React from "react";
 
-const ResultModal = ({ title, content, callbackFn, v }) => {
-  console.log("callbackfn", callbackFn);
-  // 문1) v를 활용하여 Addcomponet에서 alert 창을 띄운다.
-  // 데이터는 단방향으로 전달(자식으로만 전달가능)
-  // 부모로 하려면 callback 밖에 없다.
-  // redux, recoil을 사용하면 데이터 공유가능능
+const ResultModal = ({ title, content, callbackFn }) => {
+
+
   return (
     <div
       className={`fixed top-0 left-0 z-[1055] flex h-full w-full justify-center bg-black
@@ -14,7 +11,6 @@ const ResultModal = ({ title, content, callbackFn, v }) => {
         if (callbackFn) {
           callbackFn();
         }
-        // if (v) v("사랑합니다");
       }}
     >
       <div className="absolute bg-white shadow dark:bg-gray-700 opacity-100 w-1/4 rounded mt10 mb-10 px-6 min-w-[600px]">

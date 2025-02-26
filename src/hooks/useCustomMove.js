@@ -10,11 +10,13 @@ const getNum = (param, defaultValue) => {
 };
 const useCustomMove = () => {
   const navigate = useNavigate();
-  const [refresh, setRefresh] = useState(false); //추가
+  const [refresh, setRefresh] = useState(false); // 동일 페이지 클릭 시 서버 호출 문제 해결 위해 사용
   const [queryParams] = useSearchParams();
+  console.log("queryParams", queryParams);
   const page = getNum(queryParams.get("page"), 1);
   const size = getNum(queryParams.get("size"), 10);
   const queryDefault = createSearchParams({ page, size }).toString();
+
   const moveToModify = (num) => {
     console.log(queryDefault);
     navigate({
@@ -45,7 +47,7 @@ const useCustomMove = () => {
       pathname: `../list`,
       search: queryStr,
     });
-    setRefresh(!refresh);
+    setRefresh(!refresh); // 동일 페이지 클릭 시 서버 호출 문제 해결 위해 사용
   };
   return { moveToList, moveToModify, moveToRead, page, size, refresh };
 };

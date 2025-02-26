@@ -2,60 +2,52 @@ import axios from "axios";
 import React, { useState } from "react";
 
 const AddPage = () => {
-  const [form, setForm] = useState({
-    work: "",
-    name: "",
-    tno: 0,
-    isCompleted: "",
-  });
-  const checkHandler = (e) => {
-    console.log("check  눌렸어");
-    const { name, value } = e.target;
-    console.log(name, value);
-    if (value == "on") {
-      console.log("여기에 들어오는가?  on");
-      setForm({ ...form, [name]: true });
-    }
-  };
-  const clickHandler = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-  const addHandler = (e) => {
-    e.preventDefault();
-    const addData = async () => {
-      const res = await axios.post("http://localhost:8080/todo/add", form, {
-        headers: { "Content-Type": "application/json" },
-      });
-      console.log(res.data);
-    };
 
+  const [form, setForm] = useState({ work: "", name: "", tno: 0 });
+
+  const changeHandler = (e) => {
+    const {name, value} = e.target
+
+    setForm((i) => ({
+        ...i,
+        [name]: name === "tno" ? Number(value) : value,
+      }));
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log("전송 버튼이 눌렸어요");
+    const addData = async () => {
+      try {
+        const res = await axios.post("http://localhost:8090/todo/add", form, {
+          headers: { "Content-Type": "application/json" },
+        });
+        console.log(res.data);
+      } catch (error) {
+        console.error("Error adding data:", error);
+      }
+    };
     addData();
   };
   return (
-    <div className="">
-      <form onSubmit={addHandler}>
-        <input
-          type="text"
-          name="name"
-          placeholder="이름"
-          onChange={clickHandler}
-        ></input>
-        <input
-          type="text"
-          name="work"
-          placeholder="할일"
-          onChange={clickHandler}
-        ></input>
-        실행여부
-        <input
-          type="checkbox"
-          name="isCompleted"
-          onChange={checkHandler}
-        ></input>
-        <input type="submit" value={"제출"}></input>
+    <div className="text-3xl font-extrabold">
+      Todo Add Page
+      <form onSubmit={submitHandler}>
+        <div>
+          <label>할일</label>
+          <input name="work" onChange={changeHandler} value={form.work} placeholder="할일을 적어주세요"/>
+        </div>
+        <div>
+          <label>이름</label>
+          <input name="name" onChange={changeHandler} value={form.name} placeholder="이름을 적어주세요"/>
+        </div>
+        <div>
+          <label>번호</label>
+          <input name="tno" onChange={changeHandler} type="number" value={form.tno}/>
+        </div>
+        <button type="submit">전송</button>
       </form>
     </div>
   );
 };
-
 export default AddPage;
